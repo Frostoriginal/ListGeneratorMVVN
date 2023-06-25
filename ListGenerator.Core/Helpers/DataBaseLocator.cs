@@ -9,7 +9,7 @@ namespace ListGenerator.Core
 {
     public class DatabaseLocator
     {
-        public static ListGeneratorDbContext Database { get; set; }
+        public static EmployeeDbContext Database { get; set; }
 
     }
 }

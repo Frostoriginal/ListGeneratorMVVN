@@ -9,7 +9,7 @@ using ListGenerator.Database;
 
 namespace ListGenerator.Core.ViewModels
 {
-    public class EmployeePageViewModel:BaseViewModel
+    public class EmployeesPageViewModel:BaseViewModel
     {
         public ObservableCollection<EmployeeViewModel> EmployeeList { get; set; } = new ObservableCollection<EmployeeViewModel>();
 
@@ -20,7 +20,7 @@ namespace ListGenerator.Core.ViewModels
 
         public ICommand DeleteSelectedTasksCommand  { get; set; }
 
-        public EmployeePageViewModel()
+        public EmployeesPageViewModel()
         {
             AddNewTaskToListCommand = new RelayCommand(AddNewTask);
             DeleteSelectedTasksCommand = new RelayCommand(DeleteSelectedTask);

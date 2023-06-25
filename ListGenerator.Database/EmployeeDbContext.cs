@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ListGenerator.Database
 {
-    public class ListGeneratorDbContext : DbContext
+    public class EmployeeDbContext : DbContext
     {
         public DbSet<Employee> Employees { get; set; }
 
@@ -16,7 +16,7 @@ namespace ListGenerator.Database
         {
             base.OnConfiguring(optionsBuilder);
 
-            optionsBuilder.UseSqlite($"Filename={Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments),"DBNAME.sqlite")}");
+            optionsBuilder.UseSqlite($"Filename={Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments),"EmploDB.sqlite")}");
         }
     }
 }

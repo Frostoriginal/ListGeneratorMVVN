@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ListGenerator.Core.ViewModels;
+using ListGenerator;
 
 namespace ListGenerator
 {
@@ -25,7 +26,7 @@ namespace ListGenerator
         {
             InitializeComponent();
 
-            DataContext = new EmployeePageViewModel();
+            DataContext = new EmployeesPageViewModel();
         }
     }
 }
