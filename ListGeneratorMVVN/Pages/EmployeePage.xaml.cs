@@ -265,7 +265,7 @@ namespace ListGenerator
             // Call PrintDocument method to send document to printer  
 
             printDlg.ShowDialog();
-            printDlg.PrintDocument(idpSource.DocumentPaginator, "Hello WPF Printing.");
+            printDlg.PrintDocument(idpSource.DocumentPaginator, "Lista obecności");
         }
 
         private void DepartmentsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

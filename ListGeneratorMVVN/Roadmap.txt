@@ -1,0 +1,14 @@
+﻿RoadMap
+
+Todo:
+
+- Dynamically add departments, department page
+- proper department binding with input box / property value
+- date selector
+- employee adding and deleting page
+- flow document previeview
+
+Optional:
+- select all button
+- print selected lists, print selected parts
+- edit headers, title page?
