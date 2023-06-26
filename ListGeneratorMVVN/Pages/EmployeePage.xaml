@@ -8,7 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="EmployeePage">
 
-    <Grid>
+    <Grid HorizontalAlignment="left" Margin="30">
         <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center" Width="500">
             <TextBlock Text="Lista pracowników: " 
                        FontSize="32" 
@@ -38,12 +38,11 @@
             <TextBlock Text="Dział: "
                        
                        Style="{StaticResource DefaultTextStyle}"/>
-            <TextBox Name="TextBoxDepartment" Text="{Binding NewEmployeeDepartment, Mode=TwoWay}"
-                     Style="{StaticResource DefaultBoxStyle}"/>
-            <ComboBox Name="DepartmentsListBox" SelectionChanged="DepartmentsListBox_SelectionChanged" >
+            <TextBlock Name="selectedDateTextBlock" Text="{Binding timeSelectedString}"/>
+            <ComboBox Name="DepartmentsListBox" SelectionChanged="DepartmentsListBox_SelectionChanged" Text="{Binding NewEmployeeDepartment, Mode=TwoWay}">
                 <ComboBox.ItemTemplate>
-                    <DataTemplate>                        
-                            <TextBlock Text="{Binding Title}" />                        
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Title}" />                        
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
@@ -69,6 +68,11 @@
             </Grid>
 
         </StackPanel>
-        
+        <StackPanel>
+            <Grid>
+        <DatePicker Name="DatePicker1" HorizontalAlignment="Left" Margin="583,173,0,0" VerticalAlignment="Top" SelectedDate="{Binding timeSelectedReference, Mode=TwoWay}" SelectedDateChanged="DatePicker_SelectedDateChanged" />
+                
+            </Grid>
+        </StackPanel>
     </Grid>
 </Page>

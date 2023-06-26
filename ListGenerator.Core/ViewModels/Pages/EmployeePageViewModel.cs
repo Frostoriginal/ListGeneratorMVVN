@@ -17,6 +17,9 @@ namespace ListGenerator.Core.ViewModels
         public string NewEmployeeSurname { get;set; }
         public string NewEmployeeDepartment { get; set; }
 
+        public DateTime timeSelectedReference { get; set; }
+        public string timeSelectedString { get; set; }
+
         public ICommand AddNewTaskToListCommand { get; set; }
 
         public ICommand DeleteSelectedTasksCommand  { get; set; }

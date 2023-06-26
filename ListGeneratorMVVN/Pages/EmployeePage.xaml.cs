@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using ListGenerator.Core.ViewModels;
 using ListGenerator;
 using ListGenerator.Core;
+using System.Security.Cryptography.X509Certificates;
 
 namespace ListGenerator
 {
@@ -30,6 +31,7 @@ namespace ListGenerator
 
             var dt = new EmployeesPageViewModel();
             DataContext = dt;
+
             departments.Add(new Department() { Title = "RECEPCJA" });
             departments.Add(new Department() { Title = "KUCHNIA" });
             departments.Add(new Department() { Title = "BAR" });
@@ -38,10 +40,15 @@ namespace ListGenerator
             departments.Add(new Department() { Title = "POKOJOWE"});
 
             DepartmentsListBox.ItemsSource = departments;
+            dt.NewEmployeeDepartment = newDepartment.Title;
+            dt.timeSelectedReference = timeSelected;
+            dt.timeSelectedString = timeSelected.ToString("MM.yyyy"); 
+            
             
         }
 
         public DateTime timeSelected = new DateTime(DateTime.Now.Year, DateTime.Now.Month+1, 1);
+
 
         string selectedMonthTranslation = "";
         public void translateTheMonth()
@@ -62,9 +69,14 @@ namespace ListGenerator
         }
 
         public List<Department> departments = new List<Department>();
-        
+
         public class Department
-        {            public string Title { get; set; }
+        { public string Title { get; set; }
+            
+            public override string ToString()
+            {
+                return Title;
+            }
         }
         
 
@@ -268,11 +280,18 @@ namespace ListGenerator
             printDlg.PrintDocument(idpSource.DocumentPaginator, "Lista obecności");
         }
 
+        Department newDepartment = new Department() { Title="testing"};
+
         private void DepartmentsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {              
+            newDepartment.Title = DepartmentsListBox.SelectedValue.ToString();            
+        }
+
+        private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            Department newDepartment = DepartmentsListBox.SelectedItem as Department;
-            TextBoxDepartment.Text = newDepartment.Title;         
-            
+            timeSelected = (DateTime)DatePicker1.SelectedDate;
+            selectedDateTextBlock.Text = timeSelected.ToString("MM.yyyy");
+            translateTheMonth();
             
         }
     }
