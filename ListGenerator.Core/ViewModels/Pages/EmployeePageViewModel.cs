@@ -13,8 +13,9 @@ namespace ListGenerator.Core.ViewModels
     {
         public ObservableCollection<EmployeeViewModel> EmployeeList { get; set; } = new ObservableCollection<EmployeeViewModel>();
 
-        public string NewWorkTaskTitle { get; set; }
-        public string NewWorkTaskDescription { get;set; }
+        public string NewEmployeeName { get; set; }
+        public string NewEmployeeSurname { get;set; }
+        public string NewEmployeeDepartment { get; set; }
 
         public ICommand AddNewTaskToListCommand { get; set; }
 
@@ -29,34 +30,39 @@ namespace ListGenerator.Core.ViewModels
             {
                 EmployeeList.Add(new EmployeeViewModel
                 {   Id = task.Id,
-                    Title = task.Title,
-                    Description = task.Description,
-                    CreatedDate = task.CreatedDate,
+                    EmployeeName = task.EmployeeName,
+                    EmployeeSurname = task.EmployeeSurname,
+                    EmployeeDepartment = task.EmployeeDepartment,
+                    
 
                 });
             }
         }
+
+        
         private void AddNewTask() 
         {
             var newTask = new EmployeeViewModel
-            { Title = NewWorkTaskTitle,          
-              Description = NewWorkTaskDescription,
-              CreatedDate = DateTime.Now
+            { EmployeeName = NewEmployeeName,          
+              EmployeeSurname = NewEmployeeSurname,
+              EmployeeDepartment = NewEmployeeDepartment,
+              
                     };
 
             EmployeeList.Add(newTask);
 
             DatabaseLocator.Database.Employees.Add(new Employee
             {   Id = newTask.Id,
-                Title = newTask.Title,
-                Description = newTask.Description,
-                CreatedDate = newTask.CreatedDate,
+                EmployeeName = newTask.EmployeeName,
+                EmployeeSurname = newTask.EmployeeSurname,
+                EmployeeDepartment = newTask.EmployeeDepartment,
+                
             });
 
             DatabaseLocator.Database.SaveChanges();
 
-            NewWorkTaskTitle = string.Empty;
-            NewWorkTaskDescription = string.Empty;
+            NewEmployeeName = string.Empty;
+            NewEmployeeSurname = string.Empty;
 
            // OnPropertyChanged(nameof(NewWorkTaskTitle));
             //OnPropertyChanged(nameof(NewWorkTaskDescription));

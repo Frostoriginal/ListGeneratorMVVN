@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ListGenerator;
+using ListGenerator.Core.ViewModels;
+using ListGenerator.Core;
 
 namespace ListGenerator
 {
@@ -25,5 +27,9 @@ namespace ListGenerator
         {
             InitializeComponent();
         }
+
+        
+
+        
     }
 }

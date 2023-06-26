@@ -11,10 +11,13 @@ namespace ListGenerator.Core.ViewModels
         public int Id { get; set; }
         public bool IsSelected { get; set; }
 
-        public string Title { get; set; }
-        public string Description { get; set; }
+        
+        public string EmployeeName { get; set; }
+        public string EmployeeSurname { get; set; }
+        public string EmployeeDepartment { get; set; }
+        
 
-        public DateTime CreatedDate { get; set; }
+      
 
     }
 }

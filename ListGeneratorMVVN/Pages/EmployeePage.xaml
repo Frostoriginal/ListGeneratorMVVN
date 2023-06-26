@@ -9,8 +9,8 @@
       Title="EmployeePage">
 
     <Grid>
-        <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Text="Twoje dzisiejsze zadania: " 
+        <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center" Width="500">
+            <TextBlock Text="Lista pracowników: " 
                        FontSize="32" 
                        Style="{StaticResource DefaultTextStyle}"/>
             <ScrollViewer Height="300" Margin="0,10 ">
@@ -24,21 +24,34 @@
             </ItemsControl>
             </ScrollViewer>
                 
-            <TextBlock Text="Tytuł zadania: " 
+            <TextBlock Text="Imię: " 
                        
                        Style="{StaticResource DefaultTextStyle}"/>
-            <TextBox Text="{Binding NewWorkTaskTitle, Mode=TwoWay}"
+            <TextBox Text="{Binding NewEmployeeName, Mode=TwoWay}"
                     Style="{StaticResource DefaultBoxStyle}" />
-            <TextBlock Text="Opis zadania: "
+            <TextBlock Text="Nazwisko: "
                        
                        Style="{StaticResource DefaultTextStyle}"/>
-            <TextBox Text="{Binding NewWorkTaskDescription, Mode=TwoWay}"
+            <TextBox Text="{Binding NewEmployeeSurname, Mode=TwoWay}"
                      Style="{StaticResource DefaultBoxStyle}"/>
+
+            <TextBlock Text="Dział: "
+                       
+                       Style="{StaticResource DefaultTextStyle}"/>
+            <TextBox Name="TextBoxDepartment" Text="{Binding NewEmployeeDepartment, Mode=TwoWay}"
+                     Style="{StaticResource DefaultBoxStyle}"/>
+            <ComboBox Name="DepartmentsListBox" SelectionChanged="DepartmentsListBox_SelectionChanged" >
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>                        
+                            <TextBlock Text="{Binding Title}" />                        
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width ="*" />
                     <ColumnDefinition Width ="*" />
-
+                    <ColumnDefinition Width ="*" />
                 </Grid.ColumnDefinitions>
                 
                 <Button Command="{Binding AddNewTaskToListCommand}"
@@ -48,6 +61,11 @@
                         Grid.Column="1"
                         Style="{StaticResource DefaultButtonStyle}"
                         Content="Usuń"></Button>
+                <Button Content="Drukuj listę"   
+                        Grid.Column="2"
+                        Style="{StaticResource DefaultButtonStyle}"
+                        Name="PrintButton"   
+                        Click="PrintSimpleTextButton_Click" />
             </Grid>
 
         </StackPanel>

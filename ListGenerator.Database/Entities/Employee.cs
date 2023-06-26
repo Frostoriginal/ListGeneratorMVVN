@@ -10,11 +10,12 @@ namespace ListGenerator.Database
     public class Employee
     {
         public int Id { get; set; }
-        public string Title { get; set; }
+        
+        public string EmployeeName { get; set; }
+        public string EmployeeSurname { get; set; }
+        public string EmployeeDepartment { get; set; }
 
-        public string Description { get; set; }
-
-        public DateTime CreatedDate { get; set; }
+        
 
     }
 }
