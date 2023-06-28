@@ -5,7 +5,7 @@
 
 
     <Style TargetType="{x:Type Button}" x:Key="DefaultButtonStyle">
-        <Setter Property="Background" Value="Orange"/>
+        <Setter Property="Background" Value="CadetBlue"/>
         <Setter Property="Foreground" Value="White" />
         <Setter Property="Padding" Value="12" />
         <Setter Property="FontSize" Value="20"/>

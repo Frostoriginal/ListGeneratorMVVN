@@ -15,7 +15,7 @@ namespace ListGenerator
     /// </summary>
     public partial class App : Application
     {
-        protected override void OnStartup(StartupEventArgs e) //ovveride do wprowadzenia zmian przy uruchomieniu aplikacji - punkt wejśćia
+        protected override void OnStartup(StartupEventArgs e) 
 
         {
             base.OnStartup(e);

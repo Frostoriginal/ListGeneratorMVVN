@@ -31,7 +31,7 @@ namespace ListGenerator
 
             var dt = new EmployeesPageViewModel();
             DataContext = dt;
-
+            //Hardcoded departments
             departments.Add(new Department() { Title = "RECEPCJA" });
             departments.Add(new Department() { Title = "KUCHNIA" });
             departments.Add(new Department() { Title = "BAR" });
@@ -42,18 +42,30 @@ namespace ListGenerator
             DepartmentsListBox.ItemsSource = departments;
             dt.NewEmployeeDepartment = newDepartment.Title;
             dt.timeSelectedReference = timeSelected;
-            dt.timeSelectedString = timeSelected.ToString("MM.yyyy"); 
-            
-            
+            dt.timeSelectedString = timeSelected.ToString("MM.yyyy");
+
         }
 
-        public DateTime timeSelected = new DateTime(DateTime.Now.Year, DateTime.Now.Month+1, 1);
+        #region Department related
+        public class Department
+        { 
+            public string Title { get; set; }
+            public override string ToString() => Title;
+            
+        }
+        public List<Department> departments = new List<Department>();
+        Department newDepartment = new Department() { Title=""};
+        #endregion
 
-
+        private void DepartmentsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {              
+            newDepartment.Title = DepartmentsListBox.SelectedValue.ToString();            
+        }
+        #region Date related
+        public DateTime timeSelected = new DateTime(DateTime.Now.Year, DateTime.Now.Month + 1, 1);
         string selectedMonthTranslation = "";
         public void translateTheMonth()
         {
-
             if (timeSelected.Month == 1) selectedMonthTranslation = "Styczeń";
             if (timeSelected.Month == 2) selectedMonthTranslation = "Luty";
             if (timeSelected.Month == 3) selectedMonthTranslation = "Marzec";
@@ -67,29 +79,64 @@ namespace ListGenerator
             if (timeSelected.Month == 11) selectedMonthTranslation = "Listopad";
             if (timeSelected.Month == 12) selectedMonthTranslation = "Grudzień";
         }
-
-        public List<Department> departments = new List<Department>();
-
-        public class Department
-        { public string Title { get; set; }
+        private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            timeSelected = (DateTime)DatePicker1.SelectedDate;
+            selectedDateTextBlock.Text = timeSelected.ToString("MM.yyyy");
+            translateTheMonth();
             
-            public override string ToString()
+        }
+        #endregion
+
+        #region FlowDocument and Document related buttons
+        public FlowDocument defaultDoc = null;
+        private void CreateButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (DatabaseLocator.Database.Employees.ToList().Count > 0)
             {
-                return Title;
+                defaultDoc = CreateFlowDocument();
+                defaultDoc.Name = "FlowDoc";
+                Error_Title.Text = "";
+                Error_Text.Text = "";
+            }
+            else
+            {
+                Error_Title.Text = "Uwaga:";
+                Error_Text.Text = "Lista pracowników jest pusta!";
             }
         }
-        
 
-        /// <summary>  
-        /// This method creates a dynamic FlowDocument. You can add anything to this  
-        /// FlowDocument that you would like to send to the printer  
-        /// </summary>  
-        /// <returns></returns>  
+        public void PrintSimpleTextButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (defaultDoc != null)
+            {
+                // Create a PrintDialog  
+                PrintDialog printDlg = new PrintDialog();                
+                // Create IDocumentPaginatorSource from FlowDocument  
+                IDocumentPaginatorSource idpSource = defaultDoc;
+                // Call PrintDocument method to send document to printer  
+                printDlg.ShowDialog();
+                printDlg.PrintDocument(idpSource.DocumentPaginator, "Lista obecności");
+                //reset error text
+                Error_Title.Text = "";
+                Error_Text.Text = "";
+            }
+            else
+            {
+                Error_Title.Text = "Uwaga:";
+                Error_Text.Text = "Wygeneruj dokument";
+            }
+            
+        }
 
+        #region FlowDocument template        
         public FlowDocument CreateFlowDocument()
         {
             // Create a FlowDocument  
             FlowDocument doc = new FlowDocument();
+
+            defaultDoc = doc;
+
             doc.ColumnWidth = 400;
             doc.PagePadding = new Thickness(50);
             //Title page
@@ -264,35 +311,8 @@ namespace ListGenerator
             return doc;
         }
 
+        #endregion
 
-        public void PrintSimpleTextButton_Click(object sender, RoutedEventArgs e)
-        {
-            // Create a PrintDialog  
-            PrintDialog printDlg = new PrintDialog();
-            // Create a FlowDocument dynamically.  
-            FlowDocument doc = CreateFlowDocument();
-            doc.Name = "FlowDoc";
-            // Create IDocumentPaginatorSource from FlowDocument  
-            IDocumentPaginatorSource idpSource = doc;
-            // Call PrintDocument method to send document to printer  
-
-            printDlg.ShowDialog();
-            printDlg.PrintDocument(idpSource.DocumentPaginator, "Lista obecności");
-        }
-
-        Department newDepartment = new Department() { Title="testing"};
-
-        private void DepartmentsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {              
-            newDepartment.Title = DepartmentsListBox.SelectedValue.ToString();            
-        }
-
-        private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
-        {
-            timeSelected = (DateTime)DatePicker1.SelectedDate;
-            selectedDateTextBlock.Text = timeSelected.ToString("MM.yyyy");
-            translateTheMonth();
-            
-        }
+        #endregion
     }
 }

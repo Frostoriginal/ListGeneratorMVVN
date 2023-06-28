@@ -2,11 +2,12 @@
 
 Todo:
 
-- Dynamically add departments, department page
-- proper department binding with input box / property value
-- date selector
+? Dynamically add departments, department page 
++ proper department binding with input box / property value
++ date selector
 - employee adding and deleting page
 - flow document previeview
+- move errors to popup window
 
 Optional:
 - select all button

@@ -19,7 +19,6 @@ namespace ListGenerator.Core.ViewModels
 
         public DateTime timeSelectedReference { get; set; }
         public string timeSelectedString { get; set; }
-
         public ICommand AddNewTaskToListCommand { get; set; }
 
         public ICommand DeleteSelectedTasksCommand  { get; set; }
