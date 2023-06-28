@@ -9,7 +9,9 @@ Todo:
 + flow document preview
 + move errors to popup window
 - reset input box state after properly adding input
-? add save as pdf
+? add save as pdf / export
+? radio boxes for title page
+? don't print empty departments
 
 Optional:
 - select all button
