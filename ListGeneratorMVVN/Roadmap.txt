@@ -6,8 +6,10 @@ Todo:
 + proper department binding with input box / property value
 + date selector
 - employee adding and deleting page
-- flow document previeview
-- move errors to popup window
++ flow document preview
++ move errors to popup window
+- reset input box state after properly adding input
+? add save as pdf
 
 Optional:
 - select all button

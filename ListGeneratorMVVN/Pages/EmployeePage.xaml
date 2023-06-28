@@ -23,11 +23,16 @@
                    Style="{StaticResource DefaultTextStyle}"
                    HorizontalAlignment="Center"/>
         <TextBlock Grid.Row="0" Grid.Column="1" Text="Dodaj/usuń &#x0d;&#x0a;pracowników: " FontSize="32" HorizontalAlignment="Center"/>
-        <TextBlock Grid.Row="0" Grid.Column="2" Text="Wybierz datę: " FontSize="32" HorizontalAlignment="Center"/>
+        <TextBlock Grid.Row="0" Grid.Column="2" Text="Podgląd: " FontSize="32" HorizontalAlignment="Center"/>
 
-        <StackPanel Grid.Row="1" Grid.Column="0"  HorizontalAlignment="Center" Width="300" Margin="15">
+        <StackPanel Grid.Row="1" Grid.Column="0"  HorizontalAlignment="Center" Width="300" Margin="15" >
             
-            <ScrollViewer Height="300" Margin="0,10 ">
+            <ScrollViewer
+                Height="500"     
+                Width="300"
+                Margin="0,20"
+                BorderThickness="5"                
+                BorderBrush="Black">
                 <ItemsControl ItemsSource="{Binding EmployeeList}" Margin="10">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -41,92 +46,115 @@
         <StackPanel Grid.Row="1" Grid.Column="1" Margin="15">
             <TextBlock Text="Imię: "                        
                        Style="{StaticResource DefaultTextStyle}"/>
-            <TextBox Text="{Binding NewEmployeeName, Mode=TwoWay}"
+            <TextBox Name="InputBoxEmployeeName"
+                Text="{Binding NewEmployeeName, Mode=TwoWay}"
                     Style="{StaticResource DefaultBoxStyle}" />
             <TextBlock Text="Nazwisko: "
                        
                        Style="{StaticResource DefaultTextStyle}"/>
-            <TextBox Text="{Binding NewEmployeeSurname, Mode=TwoWay}"
+            <TextBox Name="InputBoxEmployeeSurname"
+                     Text="{Binding NewEmployeeSurname, Mode=TwoWay}"
                      Style="{StaticResource DefaultBoxStyle}"/>
 
             <TextBlock Text="Dział: "                       
                        Style="{StaticResource DefaultTextStyle}"/>
-            <ComboBox Name="DepartmentsListBox" 
+            <ComboBox Name="DepartmentsListBox"
+                      
+                      Margin="0,10,0,20"
                       SelectionChanged="DepartmentsListBox_SelectionChanged" 
                       Text="{Binding NewEmployeeDepartment, Mode=TwoWay}"
                       SelectedIndex="0">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Title}" />
+                        <TextBlock Text="{Binding Title}"
+                                   Style="{StaticResource DefaultTextStyle}"/>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width ="*" />
-                    <ColumnDefinition Width ="*" />
-                    
+                    <ColumnDefinition Width ="*" />                    
                 </Grid.ColumnDefinitions>
 
-                <Button Command="{Binding AddNewTaskToListCommand}"
+                <Button Name="AddEmployee"
                         Style="{StaticResource DefaultButtonStyle}"
-                        Content="Dodaj"></Button>
-                <Button Command="{Binding DeleteSelectedTasksCommand}" 
-                        Grid.Column="1"
+                        Content="Dodaj"
+                        Click="ButtonUpdateAdd_Click"></Button>
+                <Button Grid.Column="1"
                         Style="{StaticResource DefaultButtonStyle}"
-                        Content="Usuń"></Button>
+                        Content="Usuń"
+                        Click="ButtonUpdateDelete_Click"></Button>
                
             </Grid>
-        </StackPanel>
-
-        <StackPanel Grid.Row="1" Grid.Column="2" Margin="15">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width ="*" />
-                    <ColumnDefinition Width ="*" />                    
+                    <ColumnDefinition Width ="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Wybierz datę: "
+                           FontSize="32"
+                           Grid.ColumnSpan="2"
+                           HorizontalAlignment="Center"
+                           Grid.Row="0"
+                           Margin="0,20"/>
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="Wybierz datę: "
+                           Margin="0,20"
+                       Style="{StaticResource DefaultTextStyle}"/>
+                <DatePicker Grid.Column="1" Grid.Row="1" Name="DatePicker1" SelectedDate="{Binding timeSelectedReference, Mode=TwoWay}" 
+                            Margin="0,20"
+                            SelectedDateChanged="DatePicker_SelectedDateChanged" />
+                <TextBlock Grid.Column="0" Grid.Row="2" Text="Wybrana data: " 
+                           Margin="0,20"
+                           Style="{StaticResource DefaultTextStyle}"/>
+                <TextBlock Grid.Column="1" Grid.Row="2" 
+                           Margin="0,20"
+                           Name="selectedDateTextBlock" 
+                           Text="{Binding timeSelectedString}"
+                           Style="{StaticResource DefaultTextStyle}"/>
+                <Button Grid.Column="0" Grid.Row="3" Content="Generuj"  
+                        Margin="0,20"
+                        Style="{StaticResource DefaultButtonStyle}"
+                        Name="CreateButton"   
+                        Click="CreateButton_Click" 
+                         />
+                <Button Grid.Column="1" Grid.Row="3" Content="Drukuj" 
+                        Margin="0,20"
+                        Style="{StaticResource DefaultButtonStyle}"
+                        Name="PrintButton"   
+                        Click="PrintSimpleTextButton_Click" />
+            </Grid>
+
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="2" Margin="15">
+            
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 
-            
-            <TextBlock Grid.Column="0" Grid.Row="0" Text="Wybierz datę: " 
-                       Style="{StaticResource DefaultTextStyle}"/>
-                <DatePicker Grid.Column="1" Grid.Row="0" Name="DatePicker1" SelectedDate="{Binding timeSelectedReference, Mode=TwoWay}" SelectedDateChanged="DatePicker_SelectedDateChanged" />
-                <TextBlock Grid.Column="0" Grid.Row="1" Text="Wybrana data: "
-                           Style="{StaticResource DefaultTextStyle}"/>
-                <TextBlock Grid.Column="1" Grid.Row="1" 
-                           Name="selectedDateTextBlock" 
-                           Text="{Binding timeSelectedString}"
-                           Style="{StaticResource DefaultTextStyle}"/>
-                <Button Grid.Column="0" Grid.Row="2" Content="Generuj"                        
-                        Style="{StaticResource DefaultButtonStyle}"
-                        Name="CreateButton"   
-                        Click="CreateButton_Click" 
-                         />
-                <Button Grid.Column="1" Grid.Row="2" Content="Drukuj"                        
-                        Style="{StaticResource DefaultButtonStyle}"
-                        Name="PrintButton"   
-                        Click="PrintSimpleTextButton_Click" />
-            </Grid>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Text="Podgląd"
-                           Style="{StaticResource DefaultTextStyle}"/>
-                <TextBlock Grid.Row="1" Text="FlowDocumentReaderPlaceholder"
-                           Style="{StaticResource DefaultTextStyle}"/>
-                <TextBlock Name="Error_Title" Grid.Row="2" Text=""
-                           Style="{StaticResource DefaultTextStyle}"/>
-                <TextBlock Name="Error_Text" Grid.Row="3" Text=""
-                           Style="{StaticResource DefaultTextStyle}"/>
-
+                
+                <FlowDocumentReader 
+                    Name="FlowDocumentReader1" 
+                    Margin="0,20"
+                    Grid.Row="1"                                    
+                    BorderThickness="1"
+                    BorderBrush="Black" MinZoom="1"
+                    Zoom="70"
+                    MaxHeight="800"
+                />
 
             </Grid>
             

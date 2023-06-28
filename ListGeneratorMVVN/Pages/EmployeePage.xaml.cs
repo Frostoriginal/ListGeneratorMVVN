@@ -43,8 +43,20 @@ namespace ListGenerator
             dt.NewEmployeeDepartment = newDepartment.Title;
             dt.timeSelectedReference = timeSelected;
             dt.timeSelectedString = timeSelected.ToString("MM.yyyy");
+            
+            //Error_Title.Text = dt.ErrorTitle;
+            //ErrorMessageLocal = dt.ErrorMessage;
+
+            viewModelRelay = dt;
+
+            ErrorMessageLocal = viewModelRelay.ErrorMessage;
+                       
 
         }
+
+        public EmployeesPageViewModel viewModelRelay = new EmployeesPageViewModel();
+
+        public string ErrorMessageLocal = "";
 
         #region Department related
         public class Department
@@ -89,21 +101,23 @@ namespace ListGenerator
         #endregion
 
         #region FlowDocument and Document related buttons
-        public FlowDocument defaultDoc = null;
+        public FlowDocument defaultDoc = new FlowDocument();
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
             if (DatabaseLocator.Database.Employees.ToList().Count > 0)
             {
                 defaultDoc = CreateFlowDocument();
                 defaultDoc.Name = "FlowDoc";
-                Error_Title.Text = "";
-                Error_Text.Text = "";
+                FlowDocumentReader1.Document = defaultDoc;
+
+
+
             }
             else
-            {
-                Error_Title.Text = "Uwaga:";
-                Error_Text.Text = "Lista pracowników jest pusta!";
+            {              
+               ErrorMessageLocal = "Lista pracowników jest pusta!";
             }
+            if (ErrorMessageLocal != "") DisplayErrorMessage();
         }
 
         public void PrintSimpleTextButton_Click(object sender, RoutedEventArgs e)
@@ -115,18 +129,15 @@ namespace ListGenerator
                 // Create IDocumentPaginatorSource from FlowDocument  
                 IDocumentPaginatorSource idpSource = defaultDoc;
                 // Call PrintDocument method to send document to printer  
-                printDlg.ShowDialog();
-                printDlg.PrintDocument(idpSource.DocumentPaginator, "Lista obecności");
-                //reset error text
-                Error_Title.Text = "";
-                Error_Text.Text = "";
+                printDlg.ShowDialog();                
+                printDlg.PrintDocument(idpSource.DocumentPaginator, "Lista obecności");                
+                
             }
             else
-            {
-                Error_Title.Text = "Uwaga:";
-                Error_Text.Text = "Wygeneruj dokument";
+            {                
+                ErrorMessageLocal = "Wygeneruj dokument"; 
             }
-            
+            if (ErrorMessageLocal != "") DisplayErrorMessage();
         }
 
         #region FlowDocument template        
@@ -314,5 +325,33 @@ namespace ListGenerator
         #endregion
 
         #endregion
+
+        private void ButtonUpdateAdd_Click(object sender, RoutedEventArgs e)
+        {
+            viewModelRelay.AddNewEmployee();
+
+            ErrorMessageLocal = viewModelRelay.ErrorMessage;            
+            if (ErrorMessageLocal != "") DisplayErrorMessage();
+            
+        }
+
+        private void ButtonUpdateDelete_Click(object sender, RoutedEventArgs e)
+        {
+            viewModelRelay.DeleteSelectedEmployee();
+
+            ErrorMessageLocal = viewModelRelay.ErrorMessage;            
+            if (ErrorMessageLocal != "") DisplayErrorMessage();
+
+        }
+
+        private void DisplayErrorMessage()
+        {
+            if (ErrorMessageLocal != "")
+            {
+                MessageBox.Show(ErrorMessageLocal, "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            ErrorMessageLocal = "";
+            
+        }
     }
 }

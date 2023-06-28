@@ -13,80 +13,152 @@ namespace ListGenerator.Core.ViewModels
     {
         public ObservableCollection<EmployeeViewModel> EmployeeList { get; set; } = new ObservableCollection<EmployeeViewModel>();
 
-        public string NewEmployeeName { get; set; }
-        public string NewEmployeeSurname { get;set; }
-        public string NewEmployeeDepartment { get; set; }
+        public string NewEmployeeName { get; set; } = "";
+        public string NewEmployeeSurname { get; set; } = "";
+        public string NewEmployeeDepartment { get; set; } = "";
 
         public DateTime timeSelectedReference { get; set; }
         public string timeSelectedString { get; set; }
-        public ICommand AddNewTaskToListCommand { get; set; }
+        public string ErrorMessage { get; set; } = "";
+        public ICommand AddNewEmployeeToListCommand { get; set; }
 
-        public ICommand DeleteSelectedTasksCommand  { get; set; }
+        public ICommand DeleteSelectedEmployeeCommand  { get; set; }
 
         public EmployeesPageViewModel()
         {
-            AddNewTaskToListCommand = new RelayCommand(AddNewTask);
-            DeleteSelectedTasksCommand = new RelayCommand(DeleteSelectedTask);
+            AddNewEmployeeToListCommand = new RelayCommand(AddNewEmployee);
+            DeleteSelectedEmployeeCommand = new RelayCommand(DeleteSelectedEmployee);
 
-            foreach (var task in DatabaseLocator.Database.Employees.ToList())
+            foreach (var Employee in DatabaseLocator.Database.Employees.ToList())
             {
                 EmployeeList.Add(new EmployeeViewModel
-                {   Id = task.Id,
-                    EmployeeName = task.EmployeeName,
-                    EmployeeSurname = task.EmployeeSurname,
-                    EmployeeDepartment = task.EmployeeDepartment,
-                    
+                {   Id = Employee.Id,
+                    EmployeeName = Employee.EmployeeName,
+                    EmployeeSurname = Employee.EmployeeSurname,
+                    EmployeeDepartment = Employee.EmployeeDepartment,                   
 
                 });
-            }
+            }            
         }
 
         
-        private void AddNewTask() 
+        public void AddNewEmployee() 
         {
-            var newTask = new EmployeeViewModel
-            { EmployeeName = NewEmployeeName,          
-              EmployeeSurname = NewEmployeeSurname,
-              EmployeeDepartment = NewEmployeeDepartment,
-              
-                    };
-
-            EmployeeList.Add(newTask);
-
-            DatabaseLocator.Database.Employees.Add(new Employee
-            {   Id = newTask.Id,
-                EmployeeName = newTask.EmployeeName,
-                EmployeeSurname = newTask.EmployeeSurname,
-                EmployeeDepartment = newTask.EmployeeDepartment,
-                
-            });
-
-            DatabaseLocator.Database.SaveChanges();
-
-            NewEmployeeName = string.Empty;
-            NewEmployeeSurname = string.Empty;
-
-           // OnPropertyChanged(nameof(NewWorkTaskTitle));
-            //OnPropertyChanged(nameof(NewWorkTaskDescription));
-        }
-
-        private void DeleteSelectedTask()
-        {
-            var selectedTasks = EmployeeList.Where(x => x.IsSelected).ToList(); 
             
-            foreach (var task in selectedTasks)
-            {
-                EmployeeList.Remove(task);
-                var foundEntity = DatabaseLocator.Database.Employees.FirstOrDefault(x => x.Id == task.Id);   
-                
-                if(foundEntity != null)
-                {
-                    DatabaseLocator.Database.Employees.Remove(foundEntity);
-                }
-                
+            ErrorMessage = "";
+            bool validInput = true;
+            
+            if (string.IsNullOrEmpty(NewEmployeeName))
+            { 
+                validInput = false;
+                ErrorMessage = "Pole Imię jest puste";
             }
 
-            DatabaseLocator.Database.SaveChanges();
+            if (string.IsNullOrEmpty(NewEmployeeSurname))
+            {
+                validInput = false;
+                if (ErrorMessage != "") ErrorMessage += "\n";
+                ErrorMessage += "Pole Nazwisko jest puste";
+            }
+            
+            if (validateTheInput(NewEmployeeName, "Imię") != true) validInput = false;
+            if (validateTheInput(NewEmployeeSurname, "Nazwisko") != true) validInput = false;
+
+
+            
+
+            if (validInput)
+            {
+                //normalize input
+                NewEmployeeName = normalizeTheInput(NewEmployeeName);
+                NewEmployeeSurname = normalizeTheInput(NewEmployeeSurname);
+                
+                var newEmployee = new EmployeeViewModel
+                { EmployeeName = NewEmployeeName,          
+                  EmployeeSurname = NewEmployeeSurname,
+                  EmployeeDepartment = NewEmployeeDepartment,             
+                };
+
+                EmployeeList.Add(newEmployee);
+
+                DatabaseLocator.Database.Employees.Add(new Employee
+                {   Id = newEmployee.Id,
+                    EmployeeName = newEmployee.EmployeeName,
+                    EmployeeSurname = newEmployee.EmployeeSurname,
+                    EmployeeDepartment = newEmployee.EmployeeDepartment,                
+                });
+
+                DatabaseLocator.Database.SaveChanges();
+
+                NewEmployeeName = string.Empty;
+                NewEmployeeSurname = string.Empty;                
+                
+            }
+            
+        }
+
+        public void DeleteSelectedEmployee()
+        {
+            var selectedEmployees = EmployeeList.Where(x => x.IsSelected).ToList(); 
+            if( selectedEmployees.Count != 0) {
+                foreach (var task in selectedEmployees)
+                {
+                    EmployeeList.Remove(task);
+                    var foundEntity = DatabaseLocator.Database.Employees.FirstOrDefault(x => x.Id == task.Id);
+
+                    if (foundEntity != null)
+                    {
+                        DatabaseLocator.Database.Employees.Remove(foundEntity);
+                    }
+                }
+                DatabaseLocator.Database.SaveChanges();
+            }
+            else
+            {                
+                ErrorMessage = "Zaznacz wpis do usunięcia.";
+            }            
+            
+        }
+
+        public bool validateTheInput(string input, string caller)
+        {
+            List<string> errors = new List<string>();
+            
+            bool isValidInput = true;
+            if (input.Length > 0 && input.Length < 2) errors.Add($"{caller} jest za krótkie.");
+            if (input.Length > 25) errors.Add($"{caller} jest za długie.");
+
+            bool invalidCharacter = false;
+            foreach (char item in input)
+            {
+                if (!char.IsLetter(item)) invalidCharacter = true;                
+            }
+            if (invalidCharacter)  errors.Add($"Pole {caller} zawiera niedozwolone znaki."); 
+
+
+            if (errors.Count > 0)
+            {
+                isValidInput = false;
+                if (ErrorMessage != "") ErrorMessage += "\n";
+                foreach (string error in errors)
+                {
+                    ErrorMessage += $"{error}\n";
+                }               
+            }           
+
+            return isValidInput;
+        }
+
+        public string normalizeTheInput(string input)
+        {
+            input = input.ToLower();
+            char[] temp = input.ToCharArray();
+            temp[0] = char.ToUpper(temp[0]);
+
+            string result = new string(temp);
+            return result;
         }
     }
+
+
 }
