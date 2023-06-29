@@ -13,7 +13,12 @@ Todo:
 ? radio boxes for title page
 ? don't print empty departments
 
+Bugs:
+- resizing window with preview alters flowdocument properties
+
+
 Optional:
 - select all button
 - print selected lists, print selected parts
 - edit headers, title page?
+- edit font size?
