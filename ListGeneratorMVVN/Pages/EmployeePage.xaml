@@ -146,14 +146,16 @@
                 </Grid.RowDefinitions>
                 
                 
-                <FlowDocumentReader 
+                <FlowDocumentScrollViewer
                     Name="FlowDocumentReader1" 
                     Margin="0,20"
                     Grid.Row="1"                                    
                     BorderThickness="1"
                     BorderBrush="Black" MinZoom="1"
-                    Zoom="70"
-                    MaxHeight="800"
+                    Zoom="35"                    
+                    Height="400"
+                    Width="300" IsManipulationEnabled="True"
+                    
                 />
 
             </Grid>
