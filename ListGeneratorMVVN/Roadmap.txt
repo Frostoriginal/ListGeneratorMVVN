@@ -14,7 +14,7 @@ Todo:
 ? don't print empty departments
 
 Bugs:
-- resizing window with preview alters flowdocument properties
+- resizing window with preview alters flowdocument properties // fixed with fixed size readerwindow
 
 
 Optional:

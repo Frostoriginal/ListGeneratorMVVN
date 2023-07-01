@@ -188,9 +188,9 @@ namespace ListGenerator
                         #region Page styling variables
                         singlePage.BreakPageBefore = true;
                         singlePage.TextAlignment = TextAlignment.Center;
-                        int paragraphFontSize = 20;
+                        int paragraphFontSize = 16;
                         int headerFontSize = 16;
-                        int dateFontSize = 18;
+                        int dateFontSize = 20;
                         Thickness headerPadding = new Thickness(5);
                         Thickness tableBordersThickness = new Thickness(1);
 
