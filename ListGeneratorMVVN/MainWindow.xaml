@@ -65,14 +65,14 @@
                     <!--// Customer //-->
 
                     <Menu:Btn Style="{StaticResource BtnStyle}"
-                              Command="{Binding CustomersCommand}">
+                              Command="{Binding Employees_ViewCommand}">
 
                         <Grid>
 
                             <Image Source="Images/img_customer.png"
                                    Style="{StaticResource Image_Style}" />
 
-                            <TextBlock Text="Customer"
+                            <TextBlock Text="Employees"
                                        Style="{StaticResource Text_Style}" />
 
                         </Grid>

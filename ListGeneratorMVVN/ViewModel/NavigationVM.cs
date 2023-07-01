@@ -24,6 +24,8 @@ namespace ListGenerator.ViewModel
         public ICommand TransactionsCommand { get; set; }
         public ICommand ShipmentsCommand { get; set; }
         public ICommand SettingsCommand { get; set; }
+        public ICommand Employees_ViewCommand { get; set; }
+
 
         private void Home(object obj) => CurrentView = new HomeVM();
         private void Customer(object obj) => CurrentView = new CustomerVM();
@@ -32,6 +34,8 @@ namespace ListGenerator.ViewModel
         private void Transaction(object obj) => CurrentView = new TransactionVM();
         private void Shipment(object obj) => CurrentView = new ShipmentVM();
         private void Setting(object obj) => CurrentView = new SettingVM();
+
+        private void Employees_View(object obj) => CurrentView = new Employees_ViewModel();
 
         public NavigationVM()
         {
@@ -42,6 +46,7 @@ namespace ListGenerator.ViewModel
             TransactionsCommand = new RelayCommand(Transaction);
             ShipmentsCommand = new RelayCommand(Shipment);
             SettingsCommand = new RelayCommand(Setting);
+            Employees_ViewCommand = new RelayCommand(Employees_View);
 
             // Startup Page
             CurrentView = new HomeVM();

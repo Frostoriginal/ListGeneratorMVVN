@@ -33,13 +33,15 @@
                 Margin="0,20"
                 BorderThickness="5"                
                 BorderBrush="Black">
+                <!--
                 <ItemsControl ItemsSource="{Binding EmployeeList}" Margin="10">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <local:Employee/>
+                            <local:EmployeeControl/>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
+                -->
             </ScrollViewer>
         </StackPanel>
 

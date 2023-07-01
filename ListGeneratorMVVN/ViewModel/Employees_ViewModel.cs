@@ -6,10 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using ListGenerator.Database;
+using ListGenerator.Core;
+using ListGenerator.Core.ViewModels;
+using ListGenerator.Model;
 
-namespace ListGenerator.Core.ViewModels
+namespace ListGenerator.ViewModel
 {
-    public class EmployeesPageViewModel:BaseViewModel
+    public class Employees_ViewModel : BaseViewModel
     {
         public ObservableCollection<EmployeeViewModel> EmployeeList { get; set; } = new ObservableCollection<EmployeeViewModel>();
 
@@ -24,11 +27,15 @@ namespace ListGenerator.Core.ViewModels
 
         public ICommand DeleteSelectedEmployeeCommand  { get; set; }
 
-        public EmployeesPageViewModel()
+        private readonly PageModel _pageModel;
+        
+                
+        public Employees_ViewModel()
         {
+            _pageModel = new PageModel();
             AddNewEmployeeToListCommand = new RelayCommand(AddNewEmployee);
             DeleteSelectedEmployeeCommand = new RelayCommand(DeleteSelectedEmployee);
-            
+
             foreach (var Employee in DatabaseLocator.Database.Employees.ToList())
             {
                 EmployeeList.Add(new EmployeeViewModel
@@ -38,11 +45,11 @@ namespace ListGenerator.Core.ViewModels
                     EmployeeDepartment = Employee.EmployeeDepartment,                   
 
                 });
-            } 
+            }
             
         }
 
-
+        
         public void AddNewEmployee() 
         {
             
@@ -81,14 +88,14 @@ namespace ListGenerator.Core.ViewModels
                 };
 
                 EmployeeList.Add(newEmployee);
-
+                
                 DatabaseLocator.Database.Employees.Add(new Employee
                 {   Id = newEmployee.Id,
                     EmployeeName = newEmployee.EmployeeName,
                     EmployeeSurname = newEmployee.EmployeeSurname,
                     EmployeeDepartment = newEmployee.EmployeeDepartment,                
                 });
-
+                
                 DatabaseLocator.Database.SaveChanges();
 
                 NewEmployeeName = string.Empty;

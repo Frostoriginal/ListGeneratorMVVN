@@ -30,5 +30,8 @@
     <DataTemplate DataType="{x:Type vm:SettingVM}">
         <view:Settings />
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:Employees_ViewModel}">
+        <view:Employees_View />
+    </DataTemplate>
     
 </ResourceDictionary>
