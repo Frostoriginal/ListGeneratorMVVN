@@ -7,7 +7,7 @@
              xmlns:local="clr-namespace:ListGenerator"
              mc:Ignorable="d"
              d:DesignHeight="600"
-             d:DesignWidth="622"
+             d:DesignWidth="900"
              Style="{StaticResource Page_Style}">
 
     <UserControl.DataContext>
@@ -16,38 +16,19 @@
 
     <Grid Margin="30">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width ="*" />
-            <ColumnDefinition Width ="*" />
+            <ColumnDefinition Width ="300" />
+            <ColumnDefinition Width ="500" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="80"/>
+            <RowDefinition Height="120"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="0" Text="Lista pracowników: "
-                   FontSize="32" 
-                   Style="{StaticResource DefaultTextStyle}"
-                   HorizontalAlignment="Center"/>
-        <TextBlock Grid.Row="0" Grid.Column="1" Text="Dodaj/usuń &#x0d;&#x0a;pracowników: " FontSize="32" HorizontalAlignment="Center"/>
+        
+        <!-- Add / Delete form -->
+        <Border Margin="10" Grid.Column="0" Grid.RowSpan="2" Background="#272B2F" CornerRadius="20,20,20,20" />
+        <TextBlock Margin="10" Grid.Row="0" Grid.Column="0" Text="Dodaj/usuń &#x0d;&#x0a;pracowników: " FontSize="28" HorizontalAlignment="Center"/>
 
-        <StackPanel Grid.Row="1" Grid.Column="0"  HorizontalAlignment="Center" Width="300" Margin="15" >
-
-            <ScrollViewer
-                Height="500"     
-                Width="300"
-                Margin="0,20"
-                BorderThickness="5"                
-                BorderBrush="Black">
-                <ItemsControl ItemsSource="{Binding EmployeeList}" Margin="10">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <local:EmployeeControl/>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </ScrollViewer>
-        </StackPanel>
-
-        <StackPanel Grid.Row="1" Grid.Column="1" Margin="15">
+        <StackPanel Grid.Row="1" Grid.Column="0" Margin="15">
             <TextBlock Text="Imię: "                        
                        Style="{StaticResource DefaultTextStyle}"/>
             <TextBox Name="InputBoxEmployeeName"
@@ -70,7 +51,7 @@
                       SelectedIndex="0">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Title}"
+                        <TextBlock Text="{Binding DepartmentName}"
                                    Style="{StaticResource DefaultTextStyle}"/>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
@@ -91,6 +72,34 @@
                         Click="ButtonUpdateDelete_Click"></Button>
 
             </Grid>
+        </StackPanel>
+
+        <!-- List of employees -->
+        <Border Width="450"  Margin="10" Grid.Column="1" Grid.RowSpan="2" Background="#272B2F" CornerRadius="20,20,20,20" HorizontalAlignment="Left"/>
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="Lista pracowników: "
+                   FontSize="28" 
+                   Style="{StaticResource DefaultTextStyle}"
+                   HorizontalAlignment="Center"
+                   Margin="10"/>
+
+
+        <StackPanel Grid.Row="1" Grid.Column="1"  HorizontalAlignment="Left" Width="800" Margin="15" >
+
+            <ScrollViewer
+                Height="500"     
+                Width="400"
+                Margin="0,20"
+                BorderThickness="5"                
+                BorderBrush="Black"
+                HorizontalAlignment="left">
+                <ItemsControl ItemsSource="{Binding EmployeeList}" Margin="10">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <local:EmployeeControl/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
         </StackPanel>
 
     </Grid>

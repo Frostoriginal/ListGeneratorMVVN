@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ListGenerator.Database.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,8 @@ namespace ListGenerator.Model
         public decimal TransactionValue { get; set; }
         public TimeOnly ShipmentDelivery { get; set; }
         public bool LocationStatus { get; set; }
+
+    public List<Department> DepartmentList { get; set; }
 
     }
 }

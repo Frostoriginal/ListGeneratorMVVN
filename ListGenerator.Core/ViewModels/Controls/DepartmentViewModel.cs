@@ -4,14 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ListGenerator.Database.Entities
+namespace ListGenerator.Core.ViewModels.Controls
 {
-    public class Department
+    public class DepartmentViewModel : BaseViewModel
     {
         public int Id { get; set; }
+        public bool IsSelected { get; set; }
 
         public string DepartmentName { get; set; }
-        public override string ToString() => DepartmentName;
+        
+
+
 
 
     }

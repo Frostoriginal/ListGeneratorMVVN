@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ListGenerator.View
+namespace ListGenerator.Controls
 {
     /// <summary>
-    /// Interaction logic for Customers.xaml
+    /// Interaction logic for DepartmentControl.xaml
     /// </summary>
-    public partial class Customers : UserControl
+    public partial class DepartmentControl : UserControl
     {
-        public Customers()
+        public DepartmentControl()
         {
             InitializeComponent();
         }
