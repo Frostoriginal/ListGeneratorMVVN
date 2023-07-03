@@ -11,7 +11,7 @@
         MinHeight="400"
         MinWidth="600"
         mc:Ignorable="d"
-        Title="MainWindow" Height="550" Width="1000" WindowState="Maximized">
+        Title="MainWindow" Height="700" Width="1100" >
     
     <Window.DataContext>
         <vm:NavigationVM />
@@ -40,9 +40,9 @@
                   Margin="20,40,0,0">
 
                 <Border Background="#272B2F"
-                        CornerRadius="20,20,20,20" />
+                        CornerRadius="20" Width="210" HorizontalAlignment="Left"/>
 
-                <StackPanel Height="400"
+                <StackPanel Height="250"
                             Width="228"
                             >
 
@@ -50,7 +50,8 @@
 
                     <Menu:Btn Style="{StaticResource BtnStyle}"
                               Command="{Binding Generate_ViewCommand}"
-                              IsChecked="True">
+                              IsChecked="True"
+                              Margin="0,20,0,0">
 
                         <Grid>
 

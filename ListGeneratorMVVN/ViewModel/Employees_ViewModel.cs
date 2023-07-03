@@ -64,7 +64,15 @@ namespace ListGenerator.ViewModel
                 if (ErrorMessage != "") ErrorMessage += "\n";
                 ErrorMessage += "Pole Nazwisko jest puste";
             }
-            
+
+            if (string.IsNullOrEmpty(NewEmployeeDepartment))
+            {
+                validInput = false;
+                if (ErrorMessage != "") ErrorMessage += "\n";
+                ErrorMessage += "Brakuje działu, dodaj działy do wyboru w sekcji Działy";
+            }
+
+
             if (validateTheInput(NewEmployeeName, "Imię") != true) validInput = false;
             if (validateTheInput(NewEmployeeSurname, "Nazwisko") != true) validInput = false;
 
@@ -136,7 +144,12 @@ namespace ListGenerator.ViewModel
             bool invalidCharacter = false;
             foreach (char item in input)
             {
-                if (!char.IsLetter(item)) invalidCharacter = true;                
+                if (!char.IsLetter(item))
+                {
+                    invalidCharacter = true;
+                    if (item == '-') invalidCharacter = false;
+                    if (item == ' ') invalidCharacter = false;
+                }              
             }
             if (invalidCharacter)  errors.Add($"Pole {caller} zawiera niedozwolone znaki."); 
 

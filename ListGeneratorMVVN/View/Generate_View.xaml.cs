@@ -121,9 +121,6 @@ namespace ListGenerator.View
                 defaultDoc = CreateFlowDocument();
                 defaultDoc.Name = "FlowDoc";
                 FlowDocumentReader1.Document = defaultDoc;
-
-
-
             }
             else
             {
@@ -134,7 +131,7 @@ namespace ListGenerator.View
 
         public void PrintSimpleTextButton_Click(object sender, RoutedEventArgs e)
         {
-            if (defaultDoc != null)
+            if (defaultDoc != null && defaultDoc.Name == "FlowDoc")
             {
                 // Create a PrintDialog  
                 PrintDialog printDlg = new PrintDialog();
@@ -338,24 +335,6 @@ namespace ListGenerator.View
         #endregion
 
         #endregion
-
-        private void ButtonUpdateAdd_Click(object sender, RoutedEventArgs e)
-        {
-            //viewModelRelay.AddNewEmployee();
-
-           // ErrorMessageLocal = viewModelRelay.ErrorMessage;
-            if (ErrorMessageLocal != "") DisplayErrorMessage();
-
-        }
-
-        private void ButtonUpdateDelete_Click(object sender, RoutedEventArgs e)
-        {
-           // viewModelRelay.DeleteSelectedEmployee();
-
-           // ErrorMessageLocal = viewModelRelay.ErrorMessage;
-            if (ErrorMessageLocal != "") DisplayErrorMessage();
-
-        }
 
         private void DisplayErrorMessage()
         {

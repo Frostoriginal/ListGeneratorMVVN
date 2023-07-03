@@ -24,7 +24,7 @@
         </Grid.RowDefinitions>
 
         <!-- Add / Delete form -->
-        <Border Margin="10" Grid.Column="0" Grid.RowSpan="2" Background="#272B2F" CornerRadius="20,20,20,20" />
+        <Border Margin="10" Grid.Column="0" Grid.RowSpan="2" Background="#272B2F" CornerRadius="20,20,20,20" Height="250" VerticalAlignment="top" />
         <TextBlock Margin="10" Grid.Row="0" Grid.Column="0" Text="Dodaj/usuń dział: " FontSize="28" HorizontalAlignment="Center"
                    Style="{StaticResource DefaultTextStyle}"/>
 
@@ -55,7 +55,7 @@
         </StackPanel>
 
         <!-- List of Departments -->
-        <Border Margin="10" Grid.Column="1" Grid.RowSpan="2" Background="#272B2F" CornerRadius="20,20,20,20" />
+        <Border Margin="10" Grid.Column="1" Grid.RowSpan="2" Background="#272B2F" CornerRadius="20,20,20,20" Height="550" VerticalAlignment="top"/>
         <TextBlock Grid.Row="0" Grid.Column="1" Text="Lista działów: "
                    FontSize="28" 
                    Style="{StaticResource DefaultTextStyle}"
@@ -63,14 +63,16 @@
                    Margin="10"/>
 
 
-        <StackPanel Grid.Row="1" Grid.Column="1"  HorizontalAlignment="Center" Width="800" Margin="15" >
+        <StackPanel Grid.Row="1" Grid.Column="1"  HorizontalAlignment="Left" Width="800" Margin="15" >
 
             <ScrollViewer
-                Height="500"     
-                Width="300"
+                Height="350"     
+                Width="400"
                 Margin="0,20"
                 BorderThickness="5"                
-                BorderBrush="Black">
+                BorderBrush="Black"
+                HorizontalAlignment="Left"               
+                >
                 <ItemsControl ItemsSource="{Binding DepartmentList}" Margin="10">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>                            

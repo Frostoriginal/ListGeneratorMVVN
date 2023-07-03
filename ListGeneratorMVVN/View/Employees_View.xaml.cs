@@ -31,7 +31,7 @@ namespace ListGenerator.View
             DataContext = dt;
 
             DepartmentsListBox.ItemsSource =  DatabaseLocator.Database.Departments.ToList();
-                       
+                                   
 
             dt.NewEmployeeDepartment = newDepartment.DepartmentName;
             viewModelRelay = dt;

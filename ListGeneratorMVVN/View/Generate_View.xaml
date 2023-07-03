@@ -25,7 +25,7 @@
         </Grid.RowDefinitions>
 
         <!-- Choose date -->
-        <Border Margin="10" Grid.Column="0" Grid.RowSpan="2" Background="#272B2F" CornerRadius="20,20,20,20" />
+        <Border Margin="10" Grid.Column="0" Grid.RowSpan="2" Background="#272B2F" CornerRadius="20,20,20,20" Height="300" VerticalAlignment="top" />
         <TextBlock Margin="10" Grid.Row="0" Grid.Column="0" Text="Wybierz datę: " FontSize="28" HorizontalAlignment="Center"
                    Style="{StaticResource DefaultTextStyle}"/>
         <Grid Grid.Row="1">
@@ -70,7 +70,7 @@
 
 
         <!-- View document -->
-        <Border Width="450"  Margin="10" Grid.Column="1" Grid.RowSpan="2" Background="#272B2F" CornerRadius="20,20,20,20" HorizontalAlignment="Left"/>
+        <Border Width="450"  Margin="10" Grid.Column="1" Grid.RowSpan="2" Background="#272B2F" CornerRadius="20,20,20,20" HorizontalAlignment="Left" Height="550" VerticalAlignment="top" />
         <TextBlock Grid.Row="0" Grid.Column="1" Text="Lista obecności: "
                    FontSize="28" 
                    Style="{StaticResource DefaultTextStyle}"
@@ -78,17 +78,8 @@
                    Margin="10"/>
 
         <StackPanel Grid.Row="1" Grid.Column="2" Margin="15" >
-
-            <Grid >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
-
-                <FlowDocumentPageViewer
+            
+            <FlowDocumentPageViewer
                     Name="FlowDocumentReader1" 
                     Margin="0,20"
                     Grid.Row="1"                                    
@@ -97,14 +88,9 @@
                     Zoom="35"                    
                     Height="400"
                     Width="300" IsManipulationEnabled="True"
-                    Background="AliceBlue"
+                    Background="#DBDBDB"                  
                     
-                    
-                />
-
-            </Grid>
-
-
+                />            
         </StackPanel>
 
 
