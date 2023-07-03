@@ -15,16 +15,11 @@ namespace ListGenerator.ViewModel
     public class Employees_ViewModel : BaseViewModel
     {
         public ObservableCollection<EmployeeViewModel> EmployeeList { get; set; } = new ObservableCollection<EmployeeViewModel>();
-
         public string NewEmployeeName { get; set; } = "";
         public string NewEmployeeSurname { get; set; } = "";
-        public string NewEmployeeDepartment { get; set; } = "";
-
-        public DateTime timeSelectedReference { get; set; }
-        public string timeSelectedString { get; set; }
+        public string NewEmployeeDepartment { get; set; } = "";               
         public string ErrorMessage { get; set; } = "";
         public ICommand AddNewEmployeeToListCommand { get; set; }
-
         public ICommand DeleteSelectedEmployeeCommand  { get; set; }
 
         private readonly PageModel _pageModel;
@@ -42,7 +37,8 @@ namespace ListGenerator.ViewModel
                 {   Id = Employee.Id,
                     EmployeeName = Employee.EmployeeName,
                     EmployeeSurname = Employee.EmployeeSurname,
-                    EmployeeDepartment = Employee.EmployeeDepartment,                   
+                    EmployeeDepartment = Employee.EmployeeDepartment,  
+                    EmployeeNameAndSurname = $"{Employee.EmployeeName} {Employee.EmployeeSurname}"
 
                 });
             }
@@ -84,7 +80,8 @@ namespace ListGenerator.ViewModel
                 var newEmployee = new EmployeeViewModel
                 { EmployeeName = NewEmployeeName,          
                   EmployeeSurname = NewEmployeeSurname,
-                  EmployeeDepartment = NewEmployeeDepartment,             
+                  EmployeeDepartment = NewEmployeeDepartment,
+                  EmployeeNameAndSurname = $"{NewEmployeeName} {NewEmployeeSurname}"
                 };
 
                 EmployeeList.Add(newEmployee);
@@ -93,7 +90,7 @@ namespace ListGenerator.ViewModel
                 {   Id = newEmployee.Id,
                     EmployeeName = newEmployee.EmployeeName,
                     EmployeeSurname = newEmployee.EmployeeSurname,
-                    EmployeeDepartment = newEmployee.EmployeeDepartment,                
+                    EmployeeDepartment = newEmployee.EmployeeDepartment,                    
                 });
                 
                 DatabaseLocator.Database.SaveChanges();

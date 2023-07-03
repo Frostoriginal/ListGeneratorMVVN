@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ListGenerator.Database;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,9 +16,11 @@ namespace ListGenerator.Core.ViewModels
         public string EmployeeName { get; set; }
         public string EmployeeSurname { get; set; }
         public string EmployeeDepartment { get; set; }
-        
 
-      
+        public string EmployeeNameAndSurname { get; set; }
+
+
+
 
     }
 }

@@ -27,8 +27,7 @@ namespace ListGenerator.ViewModel
         public List<Department> departments
         {
             get { return _pageModel.DepartmentList; }
-            set { _pageModel.DepartmentList = value; OnPropertyChanged(); }
-                
+            set { _pageModel.DepartmentList = value; OnPropertyChanged(); }                
         }
 
         public ObservableCollection<DepartmentViewModel> DepartmentList { get; set; } = new ObservableCollection<DepartmentViewModel>();
@@ -75,7 +74,7 @@ namespace ListGenerator.ViewModel
             if (validInput)
             {
                 //normalize input
-                
+                NewDepartmentName = NewDepartmentName.ToUpper();
 
                 var newDepartment = new DepartmentViewModel
                 {

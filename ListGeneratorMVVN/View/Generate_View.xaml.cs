@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ListGenerator.Core.ViewModels;
+using ListGenerator.Core.ViewModels.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,67 +14,73 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ListGenerator.Core.ViewModels;
-using ListGenerator;
-using ListGenerator.Core;
-using System.Security.Cryptography.X509Certificates;
 
-namespace ListGenerator
+namespace ListGenerator.View
 {
     /// <summary>
-    /// Interaction logic for WorkTaskPage.xaml
+    /// Interaction logic for Generate_View.xaml
     /// </summary>
-    public partial class EmployeePage : Page
+    public partial class Generate_View : UserControl
     {
-        public EmployeePage()
+        public Generate_View()
         {
             InitializeComponent();
             translateTheMonth();
 
-            var dt = new EmployeesPageViewModel();
-            DataContext = dt;
+            //var dt = new EmployeesPageViewModel();
+            //DataContext = dt;
             //Hardcoded departments
+
+            /*
             departments.Add(new Department() { Title = "RECEPCJA" });
             departments.Add(new Department() { Title = "KUCHNIA" });
             departments.Add(new Department() { Title = "BAR" });
             departments.Add(new Department() { Title = "SPA" });
-            departments.Add(new Department() { Title = "PRACOWNIK DS. TECHNICZNYCH"});
-            departments.Add(new Department() { Title = "POKOJOWE"});
+            departments.Add(new Department() { Title = "PRACOWNIK DS. TECHNICZNYCH" });
+            departments.Add(new Department() { Title = "POKOJOWE" });
+            */
+            foreach (var Department in DatabaseLocator.Database.Departments.ToList())
+            {
+                DepartmentList.Add(new DepartmentViewModel
+                {
+                    Id = Department.Id,
+                    DepartmentName = Department.DepartmentName,
 
-            DepartmentsListBox.ItemsSource = departments;
-            dt.NewEmployeeDepartment = newDepartment.Title;
-            dt.timeSelectedReference = timeSelected;
-            dt.timeSelectedString = timeSelected.ToString("MM.yyyy");
-            
+                });
+            }
+
+            DatePicker1.SelectedDate = timeSelected;
+            // dt.NewEmployeeDepartment = newDepartment.Title;
+            // dt.timeSelectedReference = timeSelected;
+            // dt.timeSelectedString = timeSelected.ToString("MM.yyyy");
+
             //Error_Title.Text = dt.ErrorTitle;
             //ErrorMessageLocal = dt.ErrorMessage;
 
-            viewModelRelay = dt;
+            // viewModelRelay = dt;
 
-            ErrorMessageLocal = viewModelRelay.ErrorMessage;
-                       
-
+            // ErrorMessageLocal = viewModelRelay.ErrorMessage;
         }
 
-        public EmployeesPageViewModel viewModelRelay = new EmployeesPageViewModel();
+
+        //public EmployeesPageViewModel viewModelRelay = new EmployeesPageViewModel();
 
         public string ErrorMessageLocal = "";
 
         #region Department related
         public class Department
-        { 
+        {
             public string Title { get; set; }
             public override string ToString() => Title;
-            
+
         }
         public List<Department> departments = new List<Department>();
-        Department newDepartment = new Department() { Title=""};
+        public List<DepartmentViewModel> DepartmentList = new List<DepartmentViewModel>();
+
+        Department newDepartment = new Department() { Title = "" };
         #endregion
 
-        private void DepartmentsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {              
-            newDepartment.Title = DepartmentsListBox.SelectedValue.ToString();            
-        }
+        
         #region Date related
         public DateTime timeSelected = new DateTime(DateTime.Now.Year, DateTime.Now.Month + 1, 1);
         string selectedMonthTranslation = "";
@@ -93,10 +101,14 @@ namespace ListGenerator
         }
         private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            timeSelected = (DateTime)DatePicker1.SelectedDate;
-            selectedDateTextBlock.Text = timeSelected.ToString("MM.yyyy");
-            translateTheMonth();
+            if(selectedDateTextBlock != null)
+            {
+                timeSelected = (DateTime)DatePicker1.SelectedDate;
+                selectedDateTextBlock.Text = timeSelected.ToString("MM.yyyy");
+            }
             
+            translateTheMonth();
+
         }
         #endregion
 
@@ -114,8 +126,8 @@ namespace ListGenerator
 
             }
             else
-            {              
-               ErrorMessageLocal = "Lista pracowników jest pusta!";
+            {
+                ErrorMessageLocal = "Lista pracowników jest pusta!";
             }
             if (ErrorMessageLocal != "") DisplayErrorMessage();
         }
@@ -125,17 +137,17 @@ namespace ListGenerator
             if (defaultDoc != null)
             {
                 // Create a PrintDialog  
-                PrintDialog printDlg = new PrintDialog();                
+                PrintDialog printDlg = new PrintDialog();
                 // Create IDocumentPaginatorSource from FlowDocument  
                 IDocumentPaginatorSource idpSource = defaultDoc;
                 // Call PrintDocument method to send document to printer  
-                printDlg.ShowDialog();                
-                printDlg.PrintDocument(idpSource.DocumentPaginator, "Lista obecności");                
-                
+                printDlg.ShowDialog();
+                printDlg.PrintDocument(idpSource.DocumentPaginator, "Lista obecności");
+
             }
             else
-            {                
-                ErrorMessageLocal = "Wygeneruj dokument"; 
+            {
+                ErrorMessageLocal = "Wygeneruj dokument";
             }
             if (ErrorMessageLocal != "") DisplayErrorMessage();
         }
@@ -147,6 +159,7 @@ namespace ListGenerator
             FlowDocument doc = new FlowDocument();
 
             defaultDoc = doc;
+            doc.Background = Brushes.White;
 
             doc.ColumnWidth = 400;
             doc.PagePadding = new Thickness(50);
@@ -166,14 +179,14 @@ namespace ListGenerator
             //Department iterator
 
             //Department Title page
-            foreach (var department in departments)
+            foreach (var department in DepartmentList)
             {
                 Section departmentTitlePage = new Section();
                 departmentTitlePage.BreakPageBefore = true;
                 departmentTitlePage.TextAlignment = TextAlignment.Center;
                 Paragraph departmentTitle = new Paragraph();
                 Bold departmentBold = new Bold();
-                departmentBold.Inlines.Add(new Run($"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n{department.Title}"));
+                departmentBold.Inlines.Add(new Run($"\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n{department.DepartmentName}"));
                 departmentTitle.Inlines.Add(departmentBold);
                 departmentTitlePage.Blocks.Add(departmentTitle);
                 departmentBold.FontSize = 80;
@@ -182,7 +195,7 @@ namespace ListGenerator
                 //Employee iterator
                 foreach (var employeeData in DatabaseLocator.Database.Employees.ToList()) //create a page for every employee
                 {
-                    if (employeeData.EmployeeDepartment.ToUpper() == department.Title.ToUpper())
+                    if (employeeData.EmployeeDepartment.ToUpper() == department.DepartmentName.ToUpper())
                     {
                         Section singlePage = new Section();
                         #region Page styling variables
@@ -328,18 +341,18 @@ namespace ListGenerator
 
         private void ButtonUpdateAdd_Click(object sender, RoutedEventArgs e)
         {
-            viewModelRelay.AddNewEmployee();
+            //viewModelRelay.AddNewEmployee();
 
-            ErrorMessageLocal = viewModelRelay.ErrorMessage;            
+           // ErrorMessageLocal = viewModelRelay.ErrorMessage;
             if (ErrorMessageLocal != "") DisplayErrorMessage();
-            
+
         }
 
         private void ButtonUpdateDelete_Click(object sender, RoutedEventArgs e)
         {
-            viewModelRelay.DeleteSelectedEmployee();
+           // viewModelRelay.DeleteSelectedEmployee();
 
-            ErrorMessageLocal = viewModelRelay.ErrorMessage;            
+           // ErrorMessageLocal = viewModelRelay.ErrorMessage;
             if (ErrorMessageLocal != "") DisplayErrorMessage();
 
         }
@@ -351,7 +364,8 @@ namespace ListGenerator
                 MessageBox.Show(ErrorMessageLocal, "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             ErrorMessageLocal = "";
-            
+
         }
+
     }
 }

@@ -1,4 +1,6 @@
 ﻿using ListGenerator;
+using ListGenerator.Core.ViewModels;
+using ListGenerator.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +25,7 @@ namespace ListGenerator
     {
         public EmployeeControl()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
     }
 }

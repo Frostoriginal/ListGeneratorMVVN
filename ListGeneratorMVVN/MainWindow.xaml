@@ -23,7 +23,7 @@
 
         <Border Background="#212529"/>
 
-        <Grid>
+        <Grid >
 
             <!--// Base Grid //-->
 
@@ -35,19 +35,21 @@
             <!--// Navigation Panel //-->
 
             <Grid HorizontalAlignment="Left"
-                  Width="228">
+                  VerticalAlignment="top"
+                  Width="228"
+                  Margin="20,40,0,0">
 
                 <Border Background="#272B2F"
-                        CornerRadius="20,0,0,20" />
+                        CornerRadius="20,20,20,20" />
 
                 <StackPanel Height="400"
                             Width="228"
                             >
 
-                    <!--// Home //-->
+                    <!--// Generate //-->
 
                     <Menu:Btn Style="{StaticResource BtnStyle}"
-                              Command="{Binding HomeCommand}"
+                              Command="{Binding Generate_ViewCommand}"
                               IsChecked="True">
 
                         <Grid>
@@ -55,7 +57,7 @@
                             <Image Source="Images/img_home.png"
                                    Style="{StaticResource Image_Style}" />
 
-                            <TextBlock Text="Home"
+                            <TextBlock Text="Generuj"
                                        Style="{StaticResource Text_Style}" />
 
                         </Grid>
@@ -72,7 +74,7 @@
                             <Image Source="Images/img_customer.png"
                                    Style="{StaticResource Image_Style}" />
 
-                            <TextBlock Text="Employees"
+                            <TextBlock Text="Pracownicy"
                                        Style="{StaticResource Text_Style}" />
 
                         </Grid>
@@ -89,80 +91,14 @@
                             <Image Source="Images/img_customer.png"
                                    Style="{StaticResource Image_Style}" />
 
-                            <TextBlock Text="Departments"
+                            <TextBlock Text="Działy"
                                        Style="{StaticResource Text_Style}" />
 
                         </Grid>
 
                     </Menu:Btn>
 
-                    <!--// Products //-->
-
-                    <Menu:Btn Style="{StaticResource BtnStyle}"
-                              Command="{Binding ProductsCommand}">
-
-                        <Grid>
-
-                            <Image Source="Images/img_product.png"
-                                   Style="{StaticResource Image_Style}" />
-
-                            <TextBlock Text="Products"
-                                       Style="{StaticResource Text_Style}" />
-
-                        </Grid>
-
-                    </Menu:Btn>
-
-                    <!--// Orders //-->
-
-                    <Menu:Btn Style="{StaticResource BtnStyle}"
-                              Command="{Binding OrdersCommand}">
-
-                        <Grid>
-
-                            <Image Source="Images/img_order.png"
-                                   Style="{StaticResource Image_Style}" />
-
-                            <TextBlock Text="Orders"
-                                       Style="{StaticResource Text_Style}" />
-
-                        </Grid>
-
-                    </Menu:Btn>
-
-                    <!--// Transactions //-->
-
-                    <Menu:Btn Style="{StaticResource BtnStyle}"
-                              Command="{Binding TransactionsCommand}">
-
-                        <Grid>
-
-                            <Image Source="Images/img_transaction.png"
-                                   Style="{StaticResource Image_Style}" />
-
-                            <TextBlock Text="Transactions"
-                                       Style="{StaticResource Text_Style}" />
-
-                        </Grid>
-
-                    </Menu:Btn>
-
-                    <!--// Shipments //-->
-
-                    <Menu:Btn Style="{StaticResource BtnStyle}"
-                              Command="{Binding ShipmentsCommand}">
-
-                        <Grid>
-
-                            <Image Source="Images/img_shipment.png"
-                                   Style="{StaticResource Image_Style}" />
-
-                            <TextBlock Text="Shipments"
-                                       Style="{StaticResource Text_Style}" />
-
-                        </Grid>
-
-                    </Menu:Btn>
+                    
 
                     <!--// Settings //-->
 
@@ -174,7 +110,7 @@
                             <Image Source="Images/img_setting.png"
                                    Style="{StaticResource Image_Style}" />
 
-                            <TextBlock Text="Settings"
+                            <TextBlock Text="Ustawienia"
                                        Style="{StaticResource Text_Style}" />
 
                         </Grid>

@@ -6,7 +6,7 @@
              xmlns:vm="clr-namespace:ListGenerator.ViewModel" xmlns:local="clr-namespace:ListGenerator.Controls"
              mc:Ignorable="d"
              d:DesignHeight="600"
-             d:DesignWidth="622"
+             d:DesignWidth="900"
              Style="{StaticResource Page_Style}">
 
     <UserControl.DataContext>
@@ -16,16 +16,17 @@
     <Grid Margin="30">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width ="300" />
-            <ColumnDefinition Width ="*" />
+            <ColumnDefinition Width ="500" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="80"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <!-- Add / Delete form -->
         <Border Margin="10" Grid.Column="0" Grid.RowSpan="2" Background="#272B2F" CornerRadius="20,20,20,20" />
-        <TextBlock Margin="10" Grid.Row="0" Grid.Column="0" Text="Dodaj/usuń dział: " FontSize="28" HorizontalAlignment="Center"/>
+        <TextBlock Margin="10" Grid.Row="0" Grid.Column="0" Text="Dodaj/usuń dział: " FontSize="28" HorizontalAlignment="Center"
+                   Style="{StaticResource DefaultTextStyle}"/>
 
         <StackPanel Grid.Row="1" Grid.Column="0" Margin="15">
             <TextBlock Text="Dział: "                        

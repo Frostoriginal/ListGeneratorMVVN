@@ -14,7 +14,8 @@
         </Grid.ColumnDefinitions>
 
         <CheckBox Grid.Column="0" IsChecked="{Binding IsSelected}"/>
-        <TextBlock Grid.Column="1" Text="{Binding DepartmentName}" />
+        <TextBlock Grid.Column="1" Text="{Binding DepartmentName}"
+                   Style="{StaticResource DefaultTextStyle}"/>
         
     </Grid>
 </UserControl>
