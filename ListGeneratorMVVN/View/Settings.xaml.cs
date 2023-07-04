@@ -1,5 +1,4 @@
-﻿using ListGenerator;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ListGenerator
+namespace ListGenerator.View
 {
     /// <summary>
-    /// Interaction logic for WorkTask.xaml
+    /// Interaction logic for Settings.xaml
     /// </summary>
-    public partial class Employee : UserControl
+    public partial class Settings : UserControl
     {
-        public Employee()
+        public Settings()
         {
             InitializeComponent();
         }

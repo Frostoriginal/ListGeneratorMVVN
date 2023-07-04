@@ -1,0 +1,29 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vm="clr-namespace:ListGenerator.ViewModel"
+                    xmlns:view="clr-namespace:ListGenerator.View">
+
+
+
+    <DataTemplate DataType="{x:Type vm:Generate_ViewModel}">
+        <view:Generate_View />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:Employees_ViewModel}">
+        <view:Employees_View />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:Departments_ViewModel}">
+        <view:Departments_View />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:SettingVM}">
+        <view:Settings />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:ProductVM}">
+        <view:Products />
+    </DataTemplate>
+
+
+</ResourceDictionary>

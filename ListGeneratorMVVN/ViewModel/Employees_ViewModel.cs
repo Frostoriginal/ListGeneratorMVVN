@@ -6,26 +6,28 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using ListGenerator.Database;
+using ListGenerator.Core;
+using ListGenerator.Core.ViewModels;
+using ListGenerator.Model;
 
-namespace ListGenerator.Core.ViewModels
+namespace ListGenerator.ViewModel
 {
-    public class EmployeesPageViewModel:BaseViewModel
+    public class Employees_ViewModel : BaseViewModel
     {
         public ObservableCollection<EmployeeViewModel> EmployeeList { get; set; } = new ObservableCollection<EmployeeViewModel>();
-
         public string NewEmployeeName { get; set; } = "";
         public string NewEmployeeSurname { get; set; } = "";
-        public string NewEmployeeDepartment { get; set; } = "";
-
-        public DateTime timeSelectedReference { get; set; }
-        public string timeSelectedString { get; set; }
+        public string NewEmployeeDepartment { get; set; } = "";               
         public string ErrorMessage { get; set; } = "";
         public ICommand AddNewEmployeeToListCommand { get; set; }
-
         public ICommand DeleteSelectedEmployeeCommand  { get; set; }
 
-        public EmployeesPageViewModel()
+        private readonly PageModel _pageModel;
+        
+                
+        public Employees_ViewModel()
         {
+            _pageModel = new PageModel();
             AddNewEmployeeToListCommand = new RelayCommand(AddNewEmployee);
             DeleteSelectedEmployeeCommand = new RelayCommand(DeleteSelectedEmployee);
 
@@ -35,10 +37,12 @@ namespace ListGenerator.Core.ViewModels
                 {   Id = Employee.Id,
                     EmployeeName = Employee.EmployeeName,
                     EmployeeSurname = Employee.EmployeeSurname,
-                    EmployeeDepartment = Employee.EmployeeDepartment,                   
+                    EmployeeDepartment = Employee.EmployeeDepartment,  
+                    EmployeeNameAndSurname = $"{Employee.EmployeeName} {Employee.EmployeeSurname}"
 
                 });
-            }            
+            }
+            
         }
 
         
@@ -60,7 +64,15 @@ namespace ListGenerator.Core.ViewModels
                 if (ErrorMessage != "") ErrorMessage += "\n";
                 ErrorMessage += "Pole Nazwisko jest puste";
             }
-            
+
+            if (string.IsNullOrEmpty(NewEmployeeDepartment))
+            {
+                validInput = false;
+                if (ErrorMessage != "") ErrorMessage += "\n";
+                ErrorMessage += "Brakuje działu, dodaj działy do wyboru w sekcji Działy";
+            }
+
+
             if (validateTheInput(NewEmployeeName, "Imię") != true) validInput = false;
             if (validateTheInput(NewEmployeeSurname, "Nazwisko") != true) validInput = false;
 
@@ -76,18 +88,19 @@ namespace ListGenerator.Core.ViewModels
                 var newEmployee = new EmployeeViewModel
                 { EmployeeName = NewEmployeeName,          
                   EmployeeSurname = NewEmployeeSurname,
-                  EmployeeDepartment = NewEmployeeDepartment,             
+                  EmployeeDepartment = NewEmployeeDepartment,
+                  EmployeeNameAndSurname = $"{NewEmployeeName} {NewEmployeeSurname}"
                 };
 
                 EmployeeList.Add(newEmployee);
-
+                
                 DatabaseLocator.Database.Employees.Add(new Employee
                 {   Id = newEmployee.Id,
                     EmployeeName = newEmployee.EmployeeName,
                     EmployeeSurname = newEmployee.EmployeeSurname,
-                    EmployeeDepartment = newEmployee.EmployeeDepartment,                
+                    EmployeeDepartment = newEmployee.EmployeeDepartment,                    
                 });
-
+                
                 DatabaseLocator.Database.SaveChanges();
 
                 NewEmployeeName = string.Empty;
@@ -131,7 +144,12 @@ namespace ListGenerator.Core.ViewModels
             bool invalidCharacter = false;
             foreach (char item in input)
             {
-                if (!char.IsLetter(item)) invalidCharacter = true;                
+                if (!char.IsLetter(item))
+                {
+                    invalidCharacter = true;
+                    if (item == '-') invalidCharacter = false;
+                    if (item == ' ') invalidCharacter = false;
+                }              
             }
             if (invalidCharacter)  errors.Add($"Pole {caller} zawiera niedozwolone znaki."); 
 
