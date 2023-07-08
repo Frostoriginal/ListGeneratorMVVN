@@ -101,7 +101,7 @@
 
                     
 
-                    <!--// Settings //-->
+                    <!--// Settings 
 
                     <Menu:Btn Style="{StaticResource BtnStyle}"
                               Command="{Binding SettingsCommand}">
@@ -117,7 +117,7 @@
                         </Grid>
 
                     </Menu:Btn>
-
+                                        //-->
                 </StackPanel>
 
             </Grid>
