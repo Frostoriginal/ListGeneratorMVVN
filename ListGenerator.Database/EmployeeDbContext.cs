@@ -16,10 +16,7 @@ namespace ListGenerator.Database
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            base.OnConfiguring(optionsBuilder);
-            //My Documents
-            //optionsBuilder.UseSqlite($"Filename={Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments),"EmploDB.sqlite")}");
-            //Program folder
+            base.OnConfiguring(optionsBuilder);            
             optionsBuilder.UseSqlite("Filename=Data/LGDB.sqlite");
 
         }

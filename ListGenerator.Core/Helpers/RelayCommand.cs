@@ -9,6 +9,7 @@ namespace ListGenerator.Core
 {
     public class RelayCommand : ICommand
     {
+        
         private Action mAction;
         
         public event EventHandler? CanExecuteChanged;
@@ -27,5 +28,6 @@ namespace ListGenerator.Core
         {
             mAction();
         }
+        
     }
 }

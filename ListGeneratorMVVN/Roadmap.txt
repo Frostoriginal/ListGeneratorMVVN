@@ -10,15 +10,17 @@ Todo:
 + move errors to popup window
 - reset input box state after properly adding input
 ? add save as pdf / export
-? radio boxes for title page
+? radio buttons for title page
 ? don't print empty departments
+- Cleanup duplicate code for viemodelbase and RelayCommand
 
 Bugs:
-- resizing window with preview alters flowdocument properties // fixed with fixed size readerwindow
+- resizing window with preview alters flowdocument properties // resolved with fixed size readerwindow
 
 
 Optional:
-- select all button
+- select all button for employees and departments
 - print selected lists, print selected parts
 - edit headers, title page?
 - edit font size?
+- add localization

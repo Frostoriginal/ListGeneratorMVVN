@@ -8,7 +8,7 @@ using System.Windows.Input;
 using ListGenerator.Database;
 using ListGenerator.Core;
 using ListGenerator.Core.ViewModels;
-using ListGenerator.Model;
+
 
 namespace ListGenerator.ViewModel
 {
@@ -21,13 +21,10 @@ namespace ListGenerator.ViewModel
         public string ErrorMessage { get; set; } = "";
         public ICommand AddNewEmployeeToListCommand { get; set; }
         public ICommand DeleteSelectedEmployeeCommand  { get; set; }
-
-        private readonly PageModel _pageModel;
-        
+                        
                 
         public Employees_ViewModel()
-        {
-            _pageModel = new PageModel();
+        {            
             AddNewEmployeeToListCommand = new RelayCommand(AddNewEmployee);
             DeleteSelectedEmployeeCommand = new RelayCommand(DeleteSelectedEmployee);
 

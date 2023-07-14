@@ -17,9 +17,7 @@
         <vm:NavigationVM />
     </Window.DataContext>
 
-    <Grid>
-
-        <!--// Window Border //-->
+    <Grid>        
 
         <Border Background="#212529"/>
 
@@ -101,7 +99,7 @@
 
                     
 
-                    <!--// Settings 
+                    <!--// Settings Placeholder
 
                     <Menu:Btn Style="{StaticResource BtnStyle}"
                               Command="{Binding SettingsCommand}">
