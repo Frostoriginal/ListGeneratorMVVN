@@ -80,9 +80,11 @@ namespace ListGenerator.View
         Department newDepartment = new Department() { Title = "" };
         #endregion
 
-        
+
         #region Date related
-        public DateTime timeSelected = new DateTime(DateTime.Now.Year, DateTime.Now.Month + 1, 1);
+        static int month = DateTime.Now.Month + 1 > 12 ? 1 : DateTime.Now.Month + 1;        
+        public DateTime timeSelected = new DateTime(DateTime.Now.Year, month, 1);
+        
         string selectedMonthTranslation = "";
         public void translateTheMonth()
         {
