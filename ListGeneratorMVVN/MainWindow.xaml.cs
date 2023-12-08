@@ -17,10 +17,7 @@ using ListGenerator.Core.ViewModels;
 using ListGenerator.Core;
 
 namespace ListGenerator
-{
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+{    
     public partial class MainWindow : Window
     {
         public MainWindow()

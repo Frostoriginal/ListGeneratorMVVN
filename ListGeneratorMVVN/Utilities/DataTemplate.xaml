@@ -21,9 +21,6 @@
         <view:Settings />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm:ProductVM}">
-        <view:Products />
-    </DataTemplate>
 
 
 </ResourceDictionary>

@@ -8,28 +8,14 @@ using System.Windows.Input;
 using ListGenerator.Core.ViewModels;
 using ListGenerator.Database;
 using ListGenerator.Database.Entities;
-using ListGenerator.Model;
+
 using ListGenerator.Core;
-using ListGenerator.Core.ViewModels;
 using ListGenerator.Core.ViewModels.Controls;
 
 namespace ListGenerator.ViewModel
 {
     class Departments_ViewModel : Utilities.ViewModelBase
-    {
-        private readonly PageModel _pageModel;
-        public int CustomerID
-        {
-            get { return _pageModel.CustomerCount; }
-            set { _pageModel.CustomerCount = value; OnPropertyChanged(); }
-        }
-
-        public List<Department> departments
-        {
-            get { return _pageModel.DepartmentList; }
-            set { _pageModel.DepartmentList = value; OnPropertyChanged(); }                
-        }
-
+    {        
         public ObservableCollection<DepartmentViewModel> DepartmentList { get; set; } = new ObservableCollection<DepartmentViewModel>();
 
         public ICommand AddNewDepartmentToListCommand { get; set; }
@@ -40,8 +26,7 @@ namespace ListGenerator.ViewModel
 
 
         public Departments_ViewModel()
-        {
-            _pageModel = new PageModel();
+        {          
             AddNewDepartmentToListCommand = new RelayCommand(AddNewEmployee);
             DeleteSelectedDepartmentCommand = new RelayCommand(DeleteSelectedEmployee);
 

@@ -103,14 +103,7 @@
         </Setter>
 
     </Style>
-
-    <ImageBrush x:Key="close_app_def"
-                ImageSource="/Images/shutdown_def.png"
-                Stretch="None" />
-
-    <ImageBrush x:Key="close_app_mo"
-                ImageSource="/Images/shutdown_mo.png"
-                Stretch="None" />
+   
 
     <Style x:Key="ExitApp"
            TargetType="{x:Type Button}">
