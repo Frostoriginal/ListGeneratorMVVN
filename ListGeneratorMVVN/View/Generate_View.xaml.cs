@@ -82,8 +82,9 @@ namespace ListGenerator.View
 
 
         #region Date related
-        static int month = DateTime.Now.Month + 1 > 12 ? 1 : DateTime.Now.Month + 1;        
-        public DateTime timeSelected = new DateTime(DateTime.Now.Year, month, 1);
+        static int month = DateTime.Now.Month + 1 > 12 ? 1 : DateTime.Now.Month + 1;
+        static int year = month < DateTime.Now.Month ? DateTime.Now.Year +1 : DateTime.Now.Year;
+        public DateTime timeSelected = new DateTime(year, month, 1);
         
         string selectedMonthTranslation = "";
         public void translateTheMonth()
