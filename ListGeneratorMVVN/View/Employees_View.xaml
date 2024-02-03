@@ -23,7 +23,7 @@
             <RowDefinition Height="120"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
+
         <!-- Add / Delete form -->
         <Border Margin="10" Grid.Column="0" Grid.RowSpan="2" Background="#272B2F" CornerRadius="20,20,20,20" Height="450" VerticalAlignment="top" />
         <TextBlock Margin="10" Grid.Row="0" Grid.Column="0" Text="Dodaj/usuń &#x0d;&#x0a;pracowników: " FontSize="28" HorizontalAlignment="Center"
@@ -70,6 +70,16 @@
                         Style="{StaticResource DefaultButtonStyle}"
                         Content="Usuń"
                         Click="ButtonUpdateDelete_Click"></Button>
+                <Button Grid.Column="1"
+                        Style="{StaticResource DefaultButtonStyle}"
+                        Content="w górę"
+                        Click="ButtonUpdateMoveUp_Click" Margin="0,58,0,-57"/>
+                <Button Grid.Column="0"
+                        Style="{StaticResource DefaultButtonStyle}"
+                        Content="w dół"
+                        Click="ButtonUpdateMoveDown_Click" Margin="0,58,0,-57"/>
+
+
 
             </Grid>
         </StackPanel>

@@ -19,7 +19,7 @@ namespace ListGenerator.Core.ViewModels
 
         public string EmployeeNameAndSurname { get; set; }
 
-
+        public int EmployeeOrder { get; set; }
 
 
     }

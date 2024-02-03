@@ -76,6 +76,24 @@ namespace ListGenerator.View
 
         }
 
+        private void ButtonUpdateMoveUp_Click(object sender, RoutedEventArgs e)
+        {
+            viewModelRelay.MoveUpSelectedEmployee();
+
+            ErrorMessageLocal = viewModelRelay.ErrorMessage;
+            if (ErrorMessageLocal != "") DisplayErrorMessage();
+
+        }
+
+        private void ButtonUpdateMoveDown_Click(object sender, RoutedEventArgs e)
+        {
+            viewModelRelay.MoveDownSelectedEmployee();
+
+            ErrorMessageLocal = viewModelRelay.ErrorMessage;
+            if (ErrorMessageLocal != "") DisplayErrorMessage();
+
+        }
+
         private void DisplayErrorMessage()
         {
             if (ErrorMessageLocal != "")

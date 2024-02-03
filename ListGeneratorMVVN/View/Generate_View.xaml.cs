@@ -1,5 +1,6 @@
 ﻿using ListGenerator.Core.ViewModels;
 using ListGenerator.Core.ViewModels.Controls;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -82,7 +83,7 @@ namespace ListGenerator.View
 
 
         #region Date related
-        static int month = DateTime.Now.Month + 1 > 12 ? 1 : DateTime.Now.Month + 1;
+        static int month = DateTime.Now.Month + 1 > 12 ? 1 : DateTime.Now.Month + 1;        
         static int year = month < DateTime.Now.Month ? DateTime.Now.Year +1 : DateTime.Now.Year;
         public DateTime timeSelected = new DateTime(year, month, 1);
         
@@ -193,7 +194,7 @@ namespace ListGenerator.View
                 doc.Blocks.Add(departmentTitlePage);
 
                 //Employee iterator
-                foreach (var employeeData in DatabaseLocator.Database.Employees.ToList()) //create a page for every employee
+                foreach (var employeeData in DatabaseLocator.Database.Employees.OrderBy(x=>x.EmployeeOrder).ToList()) //create a page for every employee
                 {
                     if (employeeData.EmployeeDepartment.ToUpper() == department.DepartmentName.ToUpper())
                     {
