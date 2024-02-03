@@ -16,6 +16,8 @@ namespace ListGenerator.Database
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            if(!Directory.Exists("Data")) Directory.CreateDirectory("Data");
+            
             base.OnConfiguring(optionsBuilder);            
             optionsBuilder.UseSqlite("Filename=Data/LGDB.sqlite");
 

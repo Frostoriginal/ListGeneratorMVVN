@@ -5,14 +5,15 @@ Todo:
 ? Dynamically add departments, department page 
 + proper department binding with input box / property value
 + date selector
-- employee adding and deleting page
++ employee adding and deleting page
 + flow document preview
 + move errors to popup window
 - reset input box state after properly adding input
 ? add save as pdf / export
 ? radio buttons for title page
-? don't print empty departments
+? don't print empty departments, add checkbox
 - Cleanup duplicate code for viemodelbase and RelayCommand
+- Add department ordering
 
 Bugs:
 - resizing window with preview alters flowdocument properties // resolved with fixed size readerwindow
